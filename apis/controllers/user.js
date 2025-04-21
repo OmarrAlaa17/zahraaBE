@@ -31,6 +31,7 @@ const formatUserData = (user) => {
     name: user.name,
     email: user.email,
     country: user.country,
+    courseList: user.courseList,
     verified: user.verified,
     isAdmin: user.isAdmin,
     isBlocked: user.isBlocked,
