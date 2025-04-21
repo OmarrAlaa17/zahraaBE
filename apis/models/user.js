@@ -17,174 +17,18 @@ const userSchema = mongoose.Schema(
       type: String,
       default: "",
     },
-    // PERSONAL INFO
-    DOB: {
-      type: Date,
-      default: "",
-    },
-    nationality: {
+    country: {
       type: String,
       default: "",
     },
-    currentCountry: {
-      type: String,
-      default: "",
+    courseList: {
+      // Array of course IDs
+      type: [String],
+      default: [],
     },
-    currentCity: {
-      type: String,
-      default: "",
-    },
-    parent: {
-      type: String,
-      default: "",
-    },
-    parentNumber: {
-      type: String,
-      default: "",
-    },
-    mobileNumber: {
-      type: String,
-      default: "",
-    },
-    gender: {
-      type: String,
-      default: "",
-    },
-    // SOCIAL INFO
-    socialState: {
-      type: String,
-      default: "",
-    },
-    numberOfChildren: {
-      type: Number,
-      default: 0,
-    },
-    // about partner user
-    aboutPartner: {
-      type: String,
-      default: "",
-    },
-    // educationInfo
-    education: {
-      type: String,
-      default: "",
-    },
-    educationClarification: {
-      type: String,
-      default: "",
-    },
-    currentJob: {
-      type: String,
-      default: "",
-    },
-    currentJobClarification: {
-      type: String,
-      default: "",
-    },
-    // physical
-    height: {
-      type: Number,
-      default: 0,
-    },
-    weight: {
-      type: Number,
-      default: 0,
-    },
-    skinColor: {
-      type: String,
-      default: "",
-    },
-    eyeColor: {
-      type: String,
-      default: "",
-    },
-    hairColor: {
-      type: String,
-      default: "",
-    },
-    // health
-    healthStatus: {
-      type: String,
-      default: "",
-    },
-    handicapped: {
-      type: String,
-      default: "",
-    },
-    healthCondition: {
-      type: String,
-      default: "",
-    },
-    smokingStatus: {
-      type: String,
-      default: "",
-    },
-    sportsStatus: {
-      type: String,
-      default: "",
-    },
-    // religion
-    prayStatus: {
-      type: String,
-      default: "",
-    },
-    quranStatus: {
-      type: String,
-      default: "",
-    },
-    beardStatus: {
-      type: String,
-      default: "",
-    },
-    hijabStatus: {
-      type: String,
-      default: "",
-    },
-    // financial
-    financialStatus: {
-      type: String,
-      default: "",
-    },
-    accommodationStatus: {
-      type: String,
-      default: "",
-    },
-    carStatus: {
-      type: String,
-      default: "",
-    },
-    // about user
-    aboutYou: {
-      type: String,
-      default: "",
-    },
-
-    friends: [
-      {
-        type: Schema.Types.ObjectId,
-        ref: 'user', // Reference to the User model
-      }],
-    friendRequests: [
-      {
-        type: Schema.Types.ObjectId,
-        ref: 'user', // Reference to the User model
-      }],
-    wishlist: [
-      {
-        type: Schema.Types.ObjectId,
-        ref: 'user', // Reference to the User model
-      }],
     verified: {
       type: Boolean,
       default: true,
-    },
-    facebookID: {
-      type: String,
-      default: "",
-    },
-    googleID: {
-      type: String,
-      default: "",
     },
     isAdmin: {
       type: Boolean,
@@ -193,7 +37,7 @@ const userSchema = mongoose.Schema(
     isBlocked: {
       type: Boolean,
       default: false,
-    }
+    },
   },
   { timestamps: { createdAt: "created_at" } }
 );
@@ -250,7 +94,6 @@ userSchema.methods.generateAuthToken = async function () {
 userSchema.pre("save", async function (next) {
   try {
     const user = this;
-    console.log("her");
     if (user.isModified("password")) {
       console.log(2);
       user.password = await bcrypt.hash(user.password, 8);

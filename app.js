@@ -14,8 +14,6 @@ app.use(cors());
 
 const port = process.env.PORT || 3000;
 const userRoutes = require("./apis/routes/user");
-const chatRoutes = require('./apis/routes/message');
-const { handleSocketConnection } = require('./apis/controllers/message');
 
 
 require("dotenv").config();
@@ -51,7 +49,6 @@ app.use((req, res, next) => {
 
 // Routes which should handle requests
 app.use("/api/user", userRoutes);
-app.use('/api/chat', chatRoutes);
 
 // Socket.IO connection
 io.on('connection', (socket) => handleSocketConnection(socket, io));

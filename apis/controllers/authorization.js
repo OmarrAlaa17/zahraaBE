@@ -2,7 +2,6 @@ const User = require("../models/user");
 const UserController = require("../controllers/user");
 const bcrypt = require("bcryptjs");
 var passwordHash = require("password-hash")
-const uploadImg = require("../utils/uploadImg");
 const jwt = require("jsonwebtoken");
 var ejs = require('ejs');
 var fs = require('fs');
@@ -45,8 +44,9 @@ const nodemailer = require("nodemailer");
 // ############################# LOGIN/SIGNUP #############################//
 exports.signUp = async (req, res, next) => {
   try {
+    console.log("req.body", req.body);
     const user = await User.create({ ...req.body });
-    await sendVerificationEmail(user._id, user.email);
+    // await sendVerificationEmail(user._id, user.email);
     // if(req.files) urls = await uploadImg(req.files);
     // if (urls) user["image"] = urls[0]
     // await user.save();
