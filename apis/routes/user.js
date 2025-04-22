@@ -25,6 +25,7 @@ router.get("/verify/:userId", authController.verify);
 
 router.get('/courses', auth.userAuth, UserController.getCourses);
 router.post('/addCourse', auth.userAuth, AdminController.addCourse);
+router.post('/removeCourse', auth.userAuth, UserController.removeCourse);
 router.get('/getUserById/:userId', auth.userAuth, AdminController.getUserById);
 router.get('/getAllUsers', auth.adminAuth, AdminController.getAllUsers);
 
