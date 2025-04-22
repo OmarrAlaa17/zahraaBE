@@ -202,7 +202,7 @@ exports.getCourses = async (req, res) => {
 
 exports.addCourse = async (req, res) => {
   try {
-    const user = await User.findById(req.userData._id).select("-password");
+    const user = await User.findById(req.body.userId).select("-password");
     if (!user) throw new AppError("This user does not exist.", 401);
 
     if (user.courseList) {
