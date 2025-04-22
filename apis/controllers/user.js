@@ -228,3 +228,39 @@ exports.addCourse = async (req, res) => {
     });
   }
 };
+
+exports.removeCourse = async (req, res) => {
+  try {
+    const user = await User.findById(req.userData._id).select("-password");
+    if (!user) throw new AppError("This user does not exist.", 401);
+
+    if (user.courseList) {
+      if (!user.courseList.includes(req.body.courseId)) {
+        return res.status(400).json({
+          status: "Failed",
+          message: "Course not found",
+        });
+      }
+    } else {
+      return res.status(400).json({
+        status: "Failed",
+        message: "Course not found",
+      });
+    }
+
+    user.courseList = user.courseList.filter(
+      (course) => course !== req.body.courseId,
+    );
+    await user.save();
+
+    res.status(200).json({
+      status: "Success",
+      courseList: user.courseList,
+    });
+  } catch (e) {
+    res.status(400).json({
+      status: "Failed",
+      error: e.toString(),
+    });
+  }
+}

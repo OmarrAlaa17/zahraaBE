@@ -24,7 +24,7 @@ const userSchema = mongoose.Schema(
     courseList: {
       // Array of course IDs
       type: [String],
-      default: [],
+      default: ["n7P5Gb9OKx"],
     },
     verified: {
       type: Boolean,
